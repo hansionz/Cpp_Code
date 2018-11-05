@@ -1,3 +1,8 @@
+/**
+ * 饿汉模式
+ * 优点：简单
+ * 缺点：可能导致启动慢(因为对象是在main入口之前创建的)
+ **/  
 #include <iostream>
 using namespace std;
 

@@ -71,7 +71,7 @@ namespace zsc
     String& operator+=(char ch);
     String& operator+=(const char* str);
     size_t Find(char ch,size_t pos = 0);
-    size_t Find(const char* str, size_t pos = 0);
+    char* Find(const char* str, size_t pos = 0);
     void Insert(char ch, size_t pos);
     void Insert(const char* str,size_t pos);
     void Erase(size_t pos, size_t len = npos);

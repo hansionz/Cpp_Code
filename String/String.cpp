@@ -115,20 +115,47 @@ void zsc::String::Insert(const char* str,size_t pos)
 void zsc::String::Erase(size_t pos, size_t len)
 {
   assert(len > 0);
-  size_t i = pos + len;
+  size_t i = pos + len +1;
   for(; i <= _size; i++ )
   {
     _str[i-len] = _str[i];
   }
 }
+char* zsc::String::Find(const char* str, size_t pos)
+{
+  char* parent = _str;
+  const char* sub = str;
+  while(*parent!='\0')
+  {
+    char* cur = parent;
+    const char* start = sub;
+    while(*sub && *cur && (*sub == *cur))
+    {
+      ++sub;
+      ++cur;
+    }
+    if(*sub == '\0')
+    {
+      return (char*)start; 
+    }
+    else 
+    {
+      sub = start;
+    }
+    ++parent;
+  }
+  return NULL;
+}
 int main()
 {
   zsc::String s("hello world");
-  cout << s.Find('o',0) << endl;
-  s.Insert('B',1);
-  cout << s.c_str() << endl;
-  s.Erase(2,2);
-  cout << s.c_str() << endl;
+  char* ret = s.Find("wo",0);
+  cout << *ret << endl;
+  //cout << s.Find('o',0) << endl;
+  //s.Insert('B',1);
+  //cout << s.c_str() << endl;
+  //s.Erase(9,1);
+  //cout << s.c_str() << endl;
  // cout << s.Capacity() << endl;
  // s.zsc::String::Reserve(100);
  // s.Resize(20,'a');

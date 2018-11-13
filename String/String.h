@@ -31,8 +31,8 @@ namespace zsc
     }
     String(String const& s)
       :_str(nullptr)
-      ,_capacity(0)
       ,_size(0)
+      ,_capacity(0)
     {
       String tmp(s._str);
       this->Swap(tmp);
@@ -75,6 +75,8 @@ namespace zsc
     void Insert(char ch, size_t pos);
     void Insert(const char* str,size_t pos);
     void Erase(size_t pos, size_t len = npos);
+    friend ostream& operator<<(ostream& _cout,const String& s);
+    friend istream& operator>>(istream& _cin,const String& s);
   private:
     char* _str;
     size_t _size;
@@ -82,4 +84,15 @@ namespace zsc
 
     static const size_t npos;
   };
+  istream& operator>>(istream& _cin,const String& s)
+  {
+    _cin >> s._str;
+    return _cin;
+  }
+  
+  ostream& operator<<(ostream& _cout,const String& s)
+  {
+    _cout << s._str;
+    return _cout;
+  }
 }

@@ -148,9 +148,12 @@ char* zsc::String::Find(const char* str, size_t pos)
 }
 int main()
 {
-  zsc::String s("hello world");
-  char* ret = s.Find("wo",0);
-  cout << *ret << endl;
+  zsc::String s;
+  while(cin >> s)
+    cout << s << endl;
+  //cout << s << endl;
+  //char* ret = s.Find("wo",0);
+  //cout << *ret << endl;
   //cout << s.Find('o',0) << endl;
   //s.Insert('B',1);
   //cout << s.c_str() << endl;

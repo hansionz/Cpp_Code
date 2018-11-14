@@ -31,6 +31,9 @@ public:
 	Date operator--(); // --d 
 	Date operator--(int); // d--
 	void Print();
+	//重载输入和输出
+	friend std::ostream& operator<<(std::ostream& _cout, const Date& d);
+	friend std::istream& operator>>(std::istream& _cin, const Date& d);
 
 	inline int GetMonthDay(int year, int month);
 private:

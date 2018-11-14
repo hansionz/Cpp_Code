@@ -11,7 +11,7 @@ int Date::GetMonthDay(int year, int month)
 
 	return monthDay[month];
 }
-
+//¹¹Ôìº¯Êı
 Date::Date(int year, int month, int day)
 {
 	if (year >= 0
@@ -28,7 +28,7 @@ Date::Date(int year, int month, int day)
 		cout << "Date Invalid" << endl;
 	}
 }
-
+//
 inline bool Date::operator>(const Date& d)
 {
 	if (_year > d._year)
@@ -52,34 +52,34 @@ inline bool Date::operator>(const Date& d)
 
 	return false;
 }
-
+//
 inline bool Date::operator==(const Date& d)
 {
 	return _year == d._year
 		&& _month == d._month
 		&& _day == d._day;
 }
-
+//
 bool Date::operator<(const Date& d)
 {
 	return !(*this >= d);
 }
+//
 bool Date::operator<=(const Date& d)
 {
 	return !(*this > d);
 }
-
 // d1 >= d2
 bool Date::operator>=(const Date& d)
 {
 	return *this > d || *this == d;
 }
-
+//
 bool Date::operator!=(const Date& d)
 {
 	return !(*this == d);
 }
-
+//
 // d1 + 100
 Date Date::operator+(int day)
 {
@@ -198,4 +198,17 @@ int Date::operator-(const Date& d)
 		++min;
 	}
 	return flag*count;
+}
+std::ostream& operator<<(std::ostream& _cout, const Date& d)
+{
+	_cout << d._year << "-" << d._month << "-" << d._day;
+	return _cout;
+}
+std::istream& operator>>(std::istream& _cin, const Date& d)
+{
+	_cin >> d._year;
+	_cin >> d._month;
+	_cin >> d._day;
+
+	return _cin;
 }

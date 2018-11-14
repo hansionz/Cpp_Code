@@ -25,6 +25,15 @@ public:
 	{
 		cout << 4;
 	}
+	void print()
+	{
+		cout << "haha" << endl;
+	}
+	static void print1()
+	{
+		print();
+		cout << 'x' << endl;
+	}
 };
 
 int main()

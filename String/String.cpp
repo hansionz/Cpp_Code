@@ -1,6 +1,6 @@
 #include "String.h"
 
-const size_t zsc::String::npos = -1;
+//const size_t zsc::String::npos = -1;
 
 void zsc::String::Reserve(size_t n)
 {
@@ -13,6 +13,8 @@ void zsc::String::Reserve(size_t n)
     _capacity = n;
   }
 }
+
+
 void zsc::String::Resize(size_t n, char ch)
 {
   if(n < _size)
@@ -35,6 +37,7 @@ void zsc::String::Resize(size_t n, char ch)
     _size = n;
   }
 }
+
 void zsc::String::PushBack(char ch)
 {
   //1.扩容
@@ -78,7 +81,7 @@ size_t zsc::String::Find(char ch,size_t pos)
       return i;
     }
   }
-  return npos;
+  return zsc::npos;
 }
 void zsc::String::Insert(char ch, size_t pos)
 {
@@ -146,11 +149,25 @@ char* zsc::String::Find(const char* str, size_t pos)
   }
   return NULL;
 }
+//重载输入
+istream& zsc::operator>>(istream& _cin, String& s)
+{
+  _cin >> s._str;
+  return _cin;
+}
+//重载输出
+ostream& zsc:: operator<<(ostream& _cout,const String& s)
+{
+  _cout << s._str;
+  return _cout;
+}
 int main()
 {
   zsc::String s;
-  while(cin >> s)
-    cout << s << endl;
+  s = "hello world";
+  cout << s << '\n';
+  //while(cin >> s)
+  //  cout << s << endl;
   //cout << s << endl;
   //char* ret = s.Find("wo",0);
   //cout << *ret << endl;

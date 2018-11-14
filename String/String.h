@@ -29,6 +29,7 @@ namespace zsc
       swap(_capacity, s._capacity);
       swap(_size, s._size);
     }
+
     String(String const& s)
       :_str(nullptr)
       ,_size(0)
@@ -37,33 +38,40 @@ namespace zsc
       String tmp(s._str);
       this->Swap(tmp);
     }
+
     String& operator=(String s)
     {
       Swap(s);
       return *this;
     }
+
     char& operator[](size_t pos)
     {
       assert(pos < _size);
       return _str[pos];
     }
+
     const char& operator[](size_t pos) const 
     {
       assert(pos < _size);
       return _str[pos];
     }
+
     size_t Size() const 
     {
       return _size;
     }
+
     size_t Capacity() const 
     {
       return _capacity;
     }
+
     const char* c_str()
     {
       return _str;
     }
+
     void Reserve(size_t n);
     void Resize(size_t n,char ch);
     void PushBack(char ch);
@@ -76,23 +84,15 @@ namespace zsc
     void Insert(const char* str,size_t pos);
     void Erase(size_t pos, size_t len = npos);
     friend ostream& operator<<(ostream& _cout,const String& s);
-    friend istream& operator>>(istream& _cin,const String& s);
+    friend istream& operator>>(istream& _cin, String& s);
   private:
     char* _str;
     size_t _size;
     size_t _capacity;
 
-    static const size_t npos;
+    static const size_t npos; //-1
   };
-  istream& operator>>(istream& _cin,const String& s)
-  {
-    _cin >> s._str;
-    return _cin;
-  }
-  
-  ostream& operator<<(ostream& _cout,const String& s)
-  {
-    _cout << s._str;
-    return _cout;
-  }
+  const size_t npos = -1;
+ostream& operator<<(ostream& _cout,const String& s);
+istream& operator>>(istream& _cin, String& s);
 }

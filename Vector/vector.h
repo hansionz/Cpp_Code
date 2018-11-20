@@ -136,7 +136,7 @@ namespace zsc
     }
     void PopBack()
     {
-      Erase(--End());
+      Erase(End() - 1);
     }
     /**
      * 各类构造函数的模拟实现
@@ -162,6 +162,9 @@ namespace zsc
     //迭代器区间构造
     //template<class InputIterator>
     Vector(Iterator begin, Iterator last)
+      :_start(nullptr)
+       ,_finish(nullptr)
+       ,_endofstorage(nullptr)
     {
       Reserve(last - begin);
      

@@ -160,7 +160,6 @@ namespace zsc
       }
     }
     //迭代器区间构造
-    //template<class InputIterator>
     Vector(Iterator begin, Iterator last)
       :_start(nullptr)
        ,_finish(nullptr)

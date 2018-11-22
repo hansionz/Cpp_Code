@@ -63,8 +63,8 @@ void test4()
 void test5()
 {
   zsc::Vector<string> v(10,"hehe");
-  zsc::Vector<string> v1(v);
-  for(size_t i = 0;i < v.Size(); i++)
+  zsc::Vector<string> v1(v.Begin(),v.End());
+  for(size_t i = 0;i < v1.Size(); i++)
   {
     cout << v1[i] << " ";
   }

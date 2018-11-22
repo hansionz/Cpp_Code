@@ -148,7 +148,7 @@ namespace zsc
        ,_endofstorage(nullptr)
     {}
     //构造n个val
-    Vector(size_t n, const T& val = T())
+    Vector(int n, const T& val = T())
       :_start(nullptr)
        ,_finish(nullptr)
        ,_endofstorage(nullptr)
@@ -160,7 +160,8 @@ namespace zsc
       }
     }
     //迭代器区间构造
-    Vector(Iterator begin, Iterator last)
+    template<class InputIterator>
+    Vector(InputIterator begin, InputIterator last)
       :_start(nullptr)
        ,_finish(nullptr)
        ,_endofstorage(nullptr)

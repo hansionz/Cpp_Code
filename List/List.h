@@ -34,7 +34,6 @@ namespace zsc
   struct ListIterator
   {
     typedef ListNode<T> Node;
-    //迭代器定义为和库一样的名字可以支持语法糖
     typedef ListIterator<T> iterator;
 
     //构造
@@ -60,6 +59,26 @@ namespace zsc
       _node = _node -> _next;
       return *this;
     }
+    // it++
+    iterator operator++(int)
+    {
+      iterator tmp(*this);
+      _node = _node -> _next;
+      return tmp;
+    }
+    // --it 
+    iterator operator--()
+    {
+      _node = _node -> _prev;
+      return *this;
+    }
+    // it--
+    iterator operator--(int)
+    {
+      iterator tmp(*this);
+      _node = _node -> _prev;
+      return tmp;
+    }
     // it1 != it2
     bool operator!=(const iterator& it)
     {
@@ -81,6 +100,7 @@ namespace zsc
     typedef ListNode<T> Node;
 
   public:
+    //迭代器定义为和库一样的名字可以支持语法糖
     typedef ListIterator<T> iterator;
     /**
      * 构造函数

@@ -95,8 +95,20 @@ void test5()
   }
   cout << endl;
 }
+/*测试迭代器*/
+void test6()
+{
+  int arr[] ={1,2,3,4};
+  zsc::List<int> l(arr, arr+(sizeof(arr)/sizeof(arr[0])));
+  zsc::List<int>::iterator it = l.begin();
+  ++it;
+  //cout << *(it++) << endl;
+  //--it 
+  //--it;
+  cout << *(it--) << endl;
+}
 int main()
 {
-  test5();
+  test6();
   return 0;
 }

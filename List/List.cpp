@@ -107,8 +107,32 @@ void test6()
   //--it;
   cout << *(it--) << endl;
 }
+void test7()
+{
+  zsc::List<int> l(4,10);
+  zsc::List<int> l1(l);
+  l.PushBack(1);
+  l.PopFront();
+  for(auto e : l1)
+  {
+    cout << e << " ";
+  }
+  cout << endl;
+}
+void test8()
+{
+  zsc::List<string> l(5,"he");
+  zsc::List<string>::const_iterator cit = l.cbegin();
+  while(cit != l.cend())
+  {
+    //*cit = 2;const迭代器不能修改
+    cout << *cit << " ";
+    ++cit;
+  }
+  cout << endl;
+}
 int main()
 {
-  test6();
+  test8();
   return 0;
 }

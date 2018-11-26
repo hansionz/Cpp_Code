@@ -30,11 +30,11 @@ namespace zsc
   /**
    * 模拟实现list的迭代器类
    */ 
-  template<class T>
+  template<class T, class Ref, class Ptr>
   struct ListIterator
   {
     typedef ListNode<T> Node;
-    typedef ListIterator<T> iterator;
+    typedef ListIterator<T, Ref, Ptr> iterator;
 
     //构造
     ListIterator(Node* node)
@@ -49,9 +49,14 @@ namespace zsc
      * 重载迭代器的解引用、++、!=、==
      */ 
     // *it
-    T& operator*()
+    Ref operator*()
     {
       return _node -> _data;
+    }
+    // it ->
+    Ptr operator->()
+    {
+      return &(operator*());
     }
     // ++it 
     iterator operator++()
@@ -101,7 +106,8 @@ namespace zsc
 
   public:
     //迭代器定义为和库一样的名字可以支持语法糖
-    typedef ListIterator<T> iterator;
+    typedef ListIterator<T, T&, T*> iterator;
+    typedef ListIterator<T,const T&, const T*> const_iterator;
     /**
      * 构造函数
      */ 
@@ -146,8 +152,17 @@ namespace zsc
       _head -> _next = _head;
       _head -> _prev = _head;
 
-      List<T> tmp(l.begin(),l.end());
-      swap(_head, tmp._head);
+      //利用迭代器区间构造拷贝
+      //List<T> tmp(l.begin(),l.end());
+      //swap(_head, tmp._head);
+      
+      //复用PushBack拷贝构造
+      iterator it = l.begin();
+      while(it != l.end())
+      {
+        PushBack(*it);
+        ++it;
+      }
     }
     //赋值运算符重载
     List<T>& operator=(List<T>& l)
@@ -169,6 +184,7 @@ namespace zsc
     //清空链表
     void Clear()
     {
+      //也可以使用迭代器
       Node* cur = _head -> _next;
       while(cur != _head)
       {
@@ -190,48 +206,64 @@ namespace zsc
     {
       return iterator(_head);
     }
+    const_iterator cbegin() const
+    {
+      return const_iterator(_head -> _next);
+    }
+    const_iterator cend() const 
+    {
+      return const_iterator(_head);
+    }
     /**
      * List Modify
      */ 
     void PushBack(const T& data)
     {
-      Node* tail = _head -> _prev;
-      Node* newnode = new Node(data);
+      //Node* tail = _head -> _prev;
+      //Node* newnode = new Node(data);
 
-      //_head tail newnode 
-      tail -> _next = newnode;
-      newnode -> _prev = tail;
-      newnode -> _next = _head;
-      _head -> _prev = newnode;
+      ////_head tail newnode 
+      //tail -> _next = newnode;
+      //newnode -> _prev = tail;
+      //newnode -> _next = _head;
+      //_head -> _prev = newnode;
+      //复用Insert
+      Insert(end(),data);
     }
     void PopBack()
     {
-      Node* del = _head -> _prev;
-      if(del != _head)
-      {
-        _head -> _prev = del -> _prev;
-        del -> _prev -> _next = _head;
-        delete del;
-        del = nullptr;
-      }
+      //Node* del = _head -> _prev;
+      //if(del != _head)
+      //{
+      //  _head -> _prev = del -> _prev;
+      //  del -> _prev -> _next = _head;
+      //  delete del;
+      //  del = nullptr;
+      //}
+      //复用Erase
+      Erase(--end());
     }
     void PushFront(const T& data)
     {
-      Node* first = _head -> _next;
-      Node* newnode = new Node(data);
-      
-      // _head newnode first 
-      _head -> _next = newnode;
-      newnode -> _prev = _head;
-      newnode -> _next = first;
-      first -> _prev = newnode;
+      //Node* first = _head -> _next;
+      //Node* newnode = new Node(data);
+      //
+      //// _head newnode first 
+      //_head -> _next = newnode;
+      //newnode -> _prev = _head;
+      //newnode -> _next = first;
+      //first -> _prev = newnode;
+      //复用Insert
+      Insert(begin(),data);
     }
     void PopFront()
     {
-      Node* second = _head -> _next -> _next;
-      _head -> _next = second;
-      delete second -> _prev;
-      second -> _prev = _head;
+      //Node* second = _head -> _next -> _next; 
+      //_head -> _next = second;
+      //delete second -> _prev;
+      //second -> _prev = _head;
+      //复用erase
+      Erase(begin());
     }
     void Insert(iterator pos, const T& data)
     {

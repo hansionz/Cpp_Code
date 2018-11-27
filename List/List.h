@@ -59,7 +59,7 @@ namespace zsc
       return &(operator*());
     }
     // ++it 
-    iterator operator++()
+    iterator& operator++()
     {
       _node = _node -> _next;
       return *this;
@@ -72,7 +72,7 @@ namespace zsc
       return tmp;
     }
     // --it 
-    iterator operator--()
+    iterator& operator--()
     {
       _node = _node -> _prev;
       return *this;
@@ -97,6 +97,70 @@ namespace zsc
     Node* _node;
   };
   /**
+   * 反向迭代器
+   */ 
+  template<class T, class Ref, class Ptr, class Iterator>
+  class ReverseIterator
+  {
+    typedef ReverseIterator<T, Ref, Ptr, Iterator> Self;
+  public:
+    ReverseIterator(const Iterator& it)
+      :_it(it)
+    {}
+    ReverseIterator(const Self& s)
+      :_it(s._it)
+    {}
+    // *rit 
+    Ref operator*()
+    {
+      Iterator temp(_it);
+      return *(--temp);
+    }
+    // rit ->
+    Ptr operator->()
+    {
+      return &(operator*());
+    }
+    // ++rit 
+    Self& operator++()
+    {
+      --_it;
+      return *this;
+    }
+    // it++
+    Self operator++(int)
+    {
+      Self temp(*this);
+      --_it;
+      return temp;
+    }
+    // --rit;
+    Self& operator--()
+    {
+      ++_it; 
+      return *this;
+    }
+    // rit--
+    Self operator--(int)
+    {
+      Self temp(*this);
+      ++_it;
+      return temp;
+    }
+    // operator s1 == s2 
+    bool operator==(const Self& s)
+    {
+      return _it == s._it;
+    }
+    // s1 != s2 
+    bool operator!=(const Self& s)
+    {
+      return _it != s._it;
+    }
+  private:
+    Iterator _it;
+  };
+  /**
    * 模拟实现list类
    */ 
   template<class T>
@@ -106,8 +170,11 @@ namespace zsc
 
   public:
     //迭代器定义为和库一样的名字可以支持语法糖
+    //定义为公有的是因为外部会用到它
     typedef ListIterator<T, T&, T*> iterator;
     typedef ListIterator<T,const T&, const T*> const_iterator;
+    typedef ReverseIterator<T, T&, T*, iterator> reverse_iterator;
+    typedef ReverseIterator<T,const T&, const T*, const_iterator> const_reverse_iterator;
     /**
      * 构造函数
      */ 
@@ -213,6 +280,23 @@ namespace zsc
     const_iterator cend() const 
     {
       return const_iterator(_head);
+    }
+    //反向迭代器
+    reverse_iterator rbegin()
+    {
+      return reverse_iterator(iterator(_head));
+    }
+    reverse_iterator rend()
+    {
+      return reverse_iterator(iterator(_head -> _next));
+    }
+    const_reverse_iterator crbegin() const 
+    {
+      return reverse_iterator(iterator(_head));
+    }
+    const_reverse_iterator crend() const 
+    {
+      return reverse_iterator(iterator(_head -> _next));
     }
     /**
      * List Modify

@@ -131,8 +131,19 @@ void test8()
   }
   cout << endl;
 }
+void test9()
+{
+  zsc::List<int> l(4,10);
+  zsc::List<int>::reverse_iterator rit = l.rbegin();
+  while(rit != l.rend())
+  {
+    cout << *rit << " ";
+    ++rit;
+  }
+  cout << endl;
+}
 int main()
 {
-  test8();
+  test9();
   return 0;
 }

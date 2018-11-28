@@ -133,13 +133,27 @@ void test8()
 }
 void test9()
 {
-  zsc::List<int> l(4,10);
+  zsc::List<int> l(2,10);
   zsc::List<int>::reverse_iterator rit = l.rbegin();
+  //cout << *rit << endl;
   while(rit != l.rend())
   {
     cout << *rit << " ";
     ++rit;
   }
+  cout << endl;
+  //auto e = l.rbegin();
+  //while(e != l.rend())
+  //{
+  //  cout << *e << " ";
+  //  ++e;
+  //}
+  cout << endl;
+  //while(rit != l.rend())
+  //{
+  //  cout << *rit << " ";
+  //  ++rit;
+  //}
   cout << endl;
 }
 int main()

@@ -113,8 +113,9 @@ namespace zsc
     // *rit 
     Ref operator*()
     {
-      Iterator temp(_it);
-      return *(--temp);
+      //Iterator temp(_it);
+      //return *(--temp);
+      return *_it;
     }
     // rit ->
     Ptr operator->()
@@ -284,11 +285,11 @@ namespace zsc
     //反向迭代器
     reverse_iterator rbegin()
     {
-      return reverse_iterator(iterator(_head));
+      return reverse_iterator(iterator(_head -> _prev)); 
     }
     reverse_iterator rend()
     {
-      return reverse_iterator(iterator(_head -> _next));
+      return reverse_iterator(iterator(_head));
     }
     const_reverse_iterator crbegin() const 
     {

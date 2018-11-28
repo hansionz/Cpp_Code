@@ -228,7 +228,7 @@ size_t zsc::String::Find(const char* str, size_t pos)
   //return NULL;
 }
 //重载输入
-istream& zsc::operator>>(istream& _cin, String& s)
+istream& zsc::operator>>(istream& _cin, const String& s)
 {
   _cin >> s._str;
   return _cin;
@@ -246,9 +246,16 @@ void testErase()
   s.Erase(4, 2);
   cout << s << endl;
 }
+void test1()
+{
+  zsc::String s;
+  cin >> s;
+  cout << s << endl;
+}
 int main()
 {
-  testErase();
+  test1();
+  //testErase();
   // zsc::String s;
   //s = "hello world";
   //cout << s << '\n';

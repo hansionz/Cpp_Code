@@ -86,7 +86,7 @@ namespace zsc
     void Insert(const char* str,size_t pos);
     void Erase(size_t pos, size_t len = npos);
     friend ostream& operator<<(ostream& _cout,const String& s);
-    friend istream& operator>>(istream& _cin, String& s);
+    friend istream& operator>>(istream& _cin,const  String& s);
   private:
     char* _str;
     size_t _size;
@@ -96,5 +96,5 @@ namespace zsc
   };
   const size_t String::npos = -1;
 ostream& operator<<(ostream& _cout,const String& s);
-istream& operator>>(istream& _cin, String& s);
+istream& operator>>(istream& _cin, const String& s);
 }

@@ -8,6 +8,9 @@ using namespace std;
 
 namespace zsc
 {
+	/**
+	  * 模拟实现优先级队列
+	  */ 
   template<class T>
   class Less 
   {

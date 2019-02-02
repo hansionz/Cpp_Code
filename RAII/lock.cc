@@ -3,6 +3,10 @@
 #include <thread>
 using namespace std;
 
+/**
+ * 
+ * RAII思想设计守卫锁
+ */ 
 template<class Mutex>
 class LockGuard
 {
